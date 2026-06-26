@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KESH MEDIA PRODUCTIONS LTD</title>
 
-<!-- Bootstrap 5 -->
+<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Font Awesome -->
@@ -15,228 +15,255 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-    font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
+body{
+    font-family:Poppins;
+    scroll-behavior:smooth;
 }
 
-.hero {
-    background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d') center/cover no-repeat;
-    height: 100vh;
-    color: white;
-    display: flex;
-    align-items: center;
-    text-align: center;
+.hero{
+    background:url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center/cover no-repeat;
+    height:100vh;
+    color:white;
+    display:flex;
+    align-items:center;
+    text-align:center;
 }
 
-.hero-overlay {
-    background: rgba(0,0,0,0.6);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
+.hero-overlay{
+    background:rgba(0,0,0,0.6);
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
 }
 
-.section-title {
-    font-weight: 700;
-    margin-bottom: 20px;
+.section-title{
+    font-weight:700;
+    margin-bottom:30px;
 }
 
-.service-card {
-    transition: 0.3s;
+.card-hover{
+    transition:0.3s;
 }
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+.card-hover:hover{
+    transform:translateY(-10px);
 }
 
-.btn-custom {
-    background: #d4af37;
-    color: black;
-    font-weight: 600;
+.btn-gold{
+    background:#d4af37;
+    color:black;
+    font-weight:600;
 }
-.btn-custom:hover {
-    background: black;
-    color: white;
+.btn-gold:hover{
+    background:black;
+    color:white;
 }
-footer {
-    background: #111;
-    color: white;
-    padding: 40px 0;
+
+footer{
+    background:#111;
+    color:white;
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">KESH MEDIA</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<div class="container">
+<a class="navbar-brand" href="#">KESH MEDIA</a>
 
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-        <li class="nav-item"><a class="nav-link" href="#impact">Impact</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </div>
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="nav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+<li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+<li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+<li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+<li class="nav-item"><a class="nav-link" href="#impact">Impact</a></li>
+<li class="nav-item"><a class="nav-link" href="#donate">Donate</a></li>
+<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+</ul>
+</div>
+</div>
 </nav>
 
 <!-- HERO -->
 <section id="home" class="hero">
-  <div class="hero-overlay">
-    <div class="container">
-      <h1 class="display-4 fw-bold">KESH MEDIA PRODUCTIONS LTD</h1>
-      <p class="lead">Telling African Stories Through Film, Photography, Drone Technology, and Youth Empowerment</p>
-      <p>We create powerful visual stories and empower young people with digital media skills.</p>
+<div class="hero-overlay">
+<div class="container">
+<h1 class="display-4 fw-bold">KESH MEDIA PRODUCTIONS LTD</h1>
 
-      <a href="#services" class="btn btn-custom btn-lg m-2">Book a Service</a>
-      <a href="#portfolio" class="btn btn-outline-light btn-lg m-2">View Portfolio</a>
-      <a href="#donate" class="btn btn-success btn-lg m-2">Donate</a>
-    </div>
-  </div>
+<p class="lead">
+Telling African Stories Through Film, Photography, Drone Technology, and Youth Empowerment
+</p>
+
+<p>We create powerful media content and train young creators for the future.</p>
+
+<a href="#services" class="btn btn-gold btn-lg m-2">Book Service</a>
+<a href="#portfolio" class="btn btn-outline-light btn-lg m-2">View Portfolio</a>
+<a href="#donate" class="btn btn-success btn-lg m-2">Donate</a>
+</div>
+</div>
 </section>
 
 <!-- ABOUT -->
 <section id="about" class="py-5">
-  <div class="container">
-    <h2 class="section-title text-center">About Us</h2>
-    <p class="text-center">
-      KESH MEDIA PRODUCTIONS LTD is a Uganda-based multimedia company specializing in documentaries,
-      photography, videography, drone filming, journalism, and youth empowerment programs.
-    </p>
-  </div>
+<div class="container text-center">
+<h2 class="section-title">About Us</h2>
+
+<p>
+KESH MEDIA PRODUCTIONS LTD is a Uganda-based multimedia company specializing in documentaries,
+photography, videography, drone filming, journalism, and youth empowerment.
+</p>
+</div>
 </section>
 
 <!-- SERVICES -->
 <section id="services" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="section-title text-center">Our Services</h2>
+<div class="container">
+<h2 class="section-title text-center">Our Services</h2>
 
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card service-card p-3">
-          <h5>Documentary Production</h5>
-          <p>Climate, tourism, agriculture, health, culture stories.</p>
-        </div>
-      </div>
+<div class="row g-4">
 
-      <div class="col-md-4">
-        <div class="card service-card p-3">
-          <h5>Photography</h5>
-          <p>Events, corporate, tourism, commercial photography.</p>
-        </div>
-      </div>
+<div class="col-md-4">
+<div class="card p-3 card-hover">
+<h5>Documentary Production</h5>
+<p>Climate, tourism, agriculture, health, culture storytelling.</p>
+</div>
+</div>
 
-      <div class="col-md-4">
-        <div class="card service-card p-3">
-          <h5>Drone Services</h5>
-          <p>Aerial photography, mapping, tourism promotion.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="col-md-4">
+<div class="card p-3 card-hover">
+<h5>Photography</h5>
+<p>Events, corporate, tourism, product photography.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card p-3 card-hover">
+<h5>Drone Services</h5>
+<p>Aerial filming, mapping, tourism promotion.</p>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
-<!-- IMPACT -->
-<section id="impact" class="py-5 text-center">
-  <div class="container">
-    <h2 class="section-title">Our Impact</h2>
-    <div class="row">
-      <div class="col-md-3"><h3>500+</h3><p>Youth Trained</p></div>
-      <div class="col-md-3"><h3>100+</h3><p>Communities</p></div>
-      <div class="col-md-3"><h3>300+</h3><p>Projects</p></div>
-      <div class="col-md-3"><h3>50+</h3><p>Partners</p></div>
-    </div>
-  </div>
+<!-- PORTFOLIO -->
+<section id="portfolio" class="py-5">
+<div class="container text-center">
+<h2 class="section-title">Portfolio</h2>
+
+<div class="row g-3">
+<div class="col-md-4"><img src="https://source.unsplash.com/400x300/?film" class="img-fluid"></div>
+<div class="col-md-4"><img src="https://source.unsplash.com/400x300/?drone" class="img-fluid"></div>
+<div class="col-md-4"><img src="https://source.unsplash.com/400x300/?photography" class="img-fluid"></div>
+</div>
+
+</div>
 </section>
 
 <!-- TEAM -->
 <section id="team" class="py-5 bg-light">
-  <div class="container text-center">
-    <h2 class="section-title">Our Team</h2>
+<div class="container text-center">
+<h2 class="section-title">Our Team</h2>
 
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5>Samuel Musana</h5>
-          <p>Founder & Managing Director</p>
-        </div>
-      </div>
+<div class="row g-4">
 
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5>Production Team</h5>
-          <p>Video, Editing & Filming Experts</p>
-        </div>
-      </div>
+<div class="col-md-4">
+<div class="card p-3 card-hover">
+<h5>Samuel Musana</h5>
+<p>Founder & Managing Director</p>
+</div>
+</div>
 
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5>Youth Trainers</h5>
-          <p>Media Skills & Empowerment Coaches</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="col-md-4">
+<div class="card p-3 card-hover">
+<h5>Production Team</h5>
+<p>Videographers & Editors</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card p-3 card-hover">
+<h5>Youth Trainers</h5>
+<p>Media Skills Development</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="py-5 text-center">
+<div class="container">
+<h2 class="section-title">Our Impact</h2>
+
+<div class="row">
+<div class="col-md-3"><h3>500+</h3><p>Youth Trained</p></div>
+<div class="col-md-3"><h3>100+</h3><p>Communities</p></div>
+<div class="col-md-3"><h3>300+</h3><p>Projects</p></div>
+<div class="col-md-3"><h3>50+</h3><p>Partners</p></div>
+</div>
+
+</div>
 </section>
 
 <!-- DONATE -->
-<section id="donate" class="py-5 text-center bg-dark text-white">
-  <div class="container">
-    <h2 class="section-title">Support Youth Empowerment</h2>
-    <p>Your donation helps train young media creators in Uganda.</p>
+<section id="donate" class="py-5 bg-dark text-white text-center">
+<div class="container">
+<h2 class="section-title">Support Youth Empowerment</h2>
 
-    <button class="btn btn-warning btn-lg m-2">$50</button>
-    <button class="btn btn-warning btn-lg m-2">$100</button>
-    <button class="btn btn-warning btn-lg m-2">$200</button>
-    <button class="btn btn-success btn-lg m-2">Donate Now</button>
-  </div>
+<p>Help us train young creators in media and technology.</p>
+
+<button class="btn btn-warning m-2">$50</button>
+<button class="btn btn-warning m-2">$100</button>
+<button class="btn btn-warning m-2">$200</button>
+<a href="#" class="btn btn-success m-2">Donate Now</a>
+</div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="py-5">
-  <div class="container">
-    <h2 class="section-title text-center">Contact Us</h2>
+<div class="container">
+<h2 class="section-title text-center">Contact Us</h2>
 
-    <div class="row">
-      <div class="col-md-6">
-        <h5>Get in Touch</h5>
-        <p>Phone: +256 774 503 176</p>
-        <p>Email: info@keshmedia.com</p>
-        <p>Location: Wandegeya, Kampala, Uganda</p>
-      </div>
+<div class="row">
+<div class="col-md-6">
+<p><b>Phone:</b> +256 774 503 176</p>
+<p><b>WhatsApp:</b> +256 701 289 424</p>
+<p><b>Email:</b> info@keshmedia.com</p>
+<p><b>Location:</b> Wandegeya, Kampala, Uganda</p>
+</div>
 
-      <div class="col-md-6">
-        <form>
-          <input class="form-control mb-2" placeholder="Full Name">
-          <input class="form-control mb-2" placeholder="Email">
-          <input class="form-control mb-2" placeholder="Phone">
-          <textarea class="form-control mb-2" placeholder="Message"></textarea>
-          <button class="btn btn-custom w-100">Send Message</button>
-        </form>
-      </div>
-    </div>
-  </div>
+<div class="col-md-6">
+<form>
+<input class="form-control mb-2" placeholder="Full Name">
+<input class="form-control mb-2" placeholder="Email">
+<input class="form-control mb-2" placeholder="Phone">
+<textarea class="form-control mb-2" placeholder="Message"></textarea>
+<button class="btn btn-gold w-100">Send Message</button>
+</form>
+</div>
+</div>
+
+</div>
 </section>
 
 <!-- FOOTER -->
-<footer class="text-center">
-  <div class="container">
-    <h5>KESH MEDIA PRODUCTIONS LTD</h5>
-    <p>Creating Powerful Stories. Empowering Youth. Transforming Communities.</p>
-    <p>© 2026 All Rights Reserved</p>
-  </div>
+<footer class="text-center p-4">
+<h5>KESH MEDIA PRODUCTIONS LTD</h5>
+<p>Creating Powerful Stories. Empowering Youth. Transforming Communities.</p>
+<p>© 2026 All Rights Reserved</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-  </html>
+    </html>
