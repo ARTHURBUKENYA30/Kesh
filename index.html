@@ -1,667 +1,621 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KESH MEDIA PRODUCTIONS LTD | Premium African Storytelling</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #e67e22;
-            --primary-dark: #d35400;
-            --secondary: #2c3e50;
-            --accent: #27ae60;
-            --light: #f8f9fa;
-            --dark: #1a1a1a;
-            --gray: #7f8c8d;
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-
-        /* --- Custom Scrollbar --- */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--light); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
-
-        /* --- Navbar --- */
-        .navbar {
-            padding: 15px 0;
-            transition: var(--transition);
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-        }
-        .navbar.scrolled {
-            padding: 8px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .navbar-brand img {
-            height: 60px;
-            transition: var(--transition);
-        }
-        .navbar.scrolled .navbar-brand img {
-            height: 50px;
-        }
-        .nav-link {
-            font-weight: 600;
-            color: var(--secondary) !important;
-            margin: 0 12px;
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-            transform: translateX(-50%);
-        }
-        .nav-link:hover::after { width: 100%; }
-
-        /* --- Hero --- */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/lusRcxilAOPsiZbH.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            color: #fff;
-            position: relative;
-        }
-        .hero-content { max-width: 900px; }
-        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 25px; }
-        .hero p { font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9; }
-
-        /* --- Sections --- */
-        section { padding: 100px 0; }
-        .section-title { margin-bottom: 60px; text-align: center; }
-        .section-title h2 { font-size: 2.5rem; margin-bottom: 20px; position: relative; display: inline-block; }
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            width: 60px;
-            height: 4px;
-            background: var(--primary);
-            transform: translateX(-50%);
-        }
-
-        /* --- Cards & Components --- */
-        .premium-card {
-            background: #fff;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            height: 100%;
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-        .premium-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.1);
-        }
-        .icon-box {
-            width: 70px;
-            height: 70px;
-            background: rgba(230, 126, 34, 0.1);
-            color: var(--primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-        }
-
-        /* --- Gallery --- */
-        .gallery-filter .btn {
-            border: none;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            margin: 5px;
-            background: var(--light);
-            color: var(--secondary);
-            transition: var(--transition);
-        }
-        .gallery-filter .btn.active { background: var(--primary); color: #fff; }
-        .gallery-item { position: relative; overflow: hidden; border-radius: 15px; margin-bottom: 30px; cursor: pointer; }
-        .gallery-item img { transition: var(--transition); width: 100%; height: 300px; object-fit: cover; }
-        .gallery-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(230, 126, 34, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            opacity: 0;
-            transition: var(--transition);
-            padding: 20px;
-            text-align: center;
-        }
-        .gallery-item:hover .gallery-overlay { opacity: 1; }
-        .gallery-item:hover img { transform: scale(1.1); }
-
-        /* --- Success Stories --- */
-        .testimonial-card {
-            background: var(--light);
-            padding: 40px;
-            border-radius: 20px;
-            position: relative;
-        }
-        .testimonial-card::before {
-            content: '\f10d';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 2rem;
-            color: rgba(230, 126, 34, 0.2);
-        }
-
-        /* --- Blog --- */
-        .blog-card { overflow: hidden; }
-        .blog-img { height: 200px; object-fit: cover; width: 100%; }
-        .blog-date { color: var(--primary); font-size: 0.9rem; font-weight: 600; }
-
-        /* --- Lightbox --- */
-        #lightbox {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 9999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-        #lightbox img { max-width: 90%; max-height: 85%; border-radius: 10px; }
-        #lightbox-close { position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #fff; cursor: pointer; }
-
-        /* --- Buttons --- */
-        .btn-premium {
-            padding: 14px 35px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-        .btn-primary-p { background: var(--primary); color: #fff; border: none; }
-        .btn-primary-p:hover { background: var(--primary-dark); transform: scale(1.05); color: #fff; }
-
-        /* --- Map Section --- */
-        .map-container {
-            width: 100%;
-            height: 450px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* --- Footer --- */
-        footer { background: var(--dark); color: rgba(255,255,255,0.7); padding: 80px 0 30px; }
-        footer h4 { color: #fff; margin-bottom: 30px; }
-        .footer-logo { height: 80px; margin-bottom: 25px; }
-        .footer-link { color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); display: block; margin-bottom: 12px; }
-        .footer-link:hover { color: var(--primary); padding-left: 10px; }
-        .social-circle {
-            width: 45px;
-            height: 45px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            margin-right: 10px;
-            transition: var(--transition);
-        }
-        .social-circle:hover { background: var(--primary); transform: translateY(-5px); color: #fff; }
-
-        /* --- Mobile Adjustments --- */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            section { padding: 60px 0; }
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KESH MEDIA PRODUCTIONS LTD</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0A0A;--black2:#111111;--black3:#1A1A1A;
+  --orange:#E85C0D;--orange-l:#FF7A2F;--orange-pale:#FFF0E8;
+  --green:#1B6B2F;--green-l:#24922F;--green-pale:#E8F5EC;
+  --purple:#5B21B6;--purple-l:#7C3AED;--purple-pale:#EDE9FE;
+  --white:#FFFFFF;--off:#F8F7F5;--gray:#777;
+  --bd:#2A2A2A;--bdl:#E2E2E2;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--black);line-height:1.6}
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;background:var(--black);border-bottom:1px solid var(--bd)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px;padding:0 5%}
+.nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.nav-logo-text .brand{font-family:'Playfair Display',serif;color:var(--orange);font-size:1rem;font-weight:700;display:block}
+.nav-logo-text .sub{font-size:.6rem;color:rgba(255,255,255,.4);letter-spacing:2.5px;text-transform:uppercase;display:block}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center}
+.nav-links a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.82rem;transition:color .2s}
+.nav-links a:hover{color:var(--orange)}
+.nav-cta{background:var(--orange)!important;color:#fff!important;padding:.38rem 1rem;border-radius:4px;font-weight:600!important}
+/* HERO */
+.hero{min-height:100vh;background:var(--black);display:flex;align-items:center;padding-top:66px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 75% at 80% 50%,rgba(232,92,13,.08),transparent 65%),radial-gradient(ellipse 40% 55% at 15% 80%,rgba(91,33,182,.08),transparent 55%)}
+.hero-grid{position:absolute;inset:0;opacity:.03;background-image:linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{position:relative;z-index:2;padding:0 5%;max-width:820px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,92,13,.1);border:1px solid rgba(232,92,13,.3);padding:.3rem .8rem;border-radius:20px;margin-bottom:1.5rem}
+.hero-badge span{font-size:.68rem;color:var(--orange);font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.hb-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+h1.htitle{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5.5vw,4.5rem);color:#fff;font-weight:900;line-height:1.08;margin-bottom:.4rem}
+h1.htitle .o{color:var(--orange)}h1.htitle .g{color:var(--green-l)}h1.htitle .p{color:var(--purple-l)}
+.hdesc{font-size:1rem;color:rgba(255,255,255,.5);margin:1.2rem 0 2.5rem;font-weight:300;max-width:520px;line-height:1.8}
+.hbtns{display:flex;flex-wrap:wrap;gap:.9rem}
+.btn-o{background:var(--orange);color:#fff;padding:.8rem 1.8rem;border-radius:5px;font-weight:600;font-size:.88rem;text-decoration:none;transition:background .2s}
+.btn-o:hover{background:var(--orange-l)}
+.btn-g{background:var(--green);color:#fff;padding:.8rem 1.8rem;border-radius:5px;font-weight:600;font-size:.88rem;text-decoration:none;transition:background .2s}
+.btn-g:hover{background:var(--green-l)}
+.btn-p{background:var(--purple);color:#fff;padding:.8rem 1.8rem;border-radius:5px;font-weight:600;font-size:.88rem;text-decoration:none;transition:background .2s}
+.btn-p:hover{background:var(--purple-l)}
+.btn-gh{border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8);padding:.8rem 1.8rem;border-radius:5px;font-size:.88rem;text-decoration:none;transition:all .2s}
+.btn-gh:hover{border-color:var(--orange);color:var(--orange)}
+/* STATS */
+.stats-band{background:var(--black2);border-bottom:1px solid var(--bd)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);padding:2.2rem 5%}
+.stat-item{text-align:center;padding:1rem;border-right:1px solid var(--bd)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;line-height:1}
+.stat-num.o{color:var(--orange)}.stat-num.g{color:var(--green-l)}.stat-num.p{color:var(--purple-l)}.stat-num.w{color:#fff}
+.stat-label{font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-top:.3rem}
+/* SECTION BASE */
+section{padding:6rem 5%}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
+.eyebrow.o{color:var(--orange)}.eyebrow.o::before{content:'';display:block;width:22px;height:2px;background:var(--orange)}
+.eyebrow.g{color:var(--green)}.eyebrow.g::before{content:'';display:block;width:22px;height:2px;background:var(--green)}
+.eyebrow.p{color:var(--purple)}.eyebrow.p::before{content:'';display:block;width:22px;height:2px;background:var(--purple)}
+h2.stitle{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;line-height:1.15;margin-bottom:1rem;color:var(--black)}
+h2.stitle.lt{color:#fff}.slead{font-size:1rem;color:var(--gray);max-width:580px;line-height:1.8}.slead.lt{color:rgba(255,255,255,.5)}
+/* ABOUT */
+.about{background:#fff}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3.5rem;align-items:start}
+.vm-block{border-left:3px solid var(--orange);padding:1.4rem 1.5rem;background:var(--off);margin-bottom:1.2rem}
+.vm-block.gn{border-color:var(--green)}.vm-block.pp{border-color:var(--purple)}
+.vm-block h3{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.4rem;color:var(--orange)}
+.vm-block.gn h3{color:var(--green)}.vm-block.pp h3{color:var(--purple)}
+.vm-block p{font-size:.88rem;color:var(--black3);line-height:1.7}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.vc{padding:1.2rem;border:1px solid var(--bdl);border-radius:6px;border-top:3px solid}
+.vc.o{border-top-color:var(--orange)}.vc.g{border-top-color:var(--green)}.vc.p{border-top-color:var(--purple)}.vc.b{border-top-color:var(--black)}
+.vc h4{font-size:.85rem;font-weight:600;margin-bottom:.25rem}.vc p{font-size:.77rem;color:var(--gray);line-height:1.5}
+/* SERVICES */
+.services{background:var(--black)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3.5rem;border:1px solid var(--bd);overflow:hidden}
+.svc-card{padding:2rem 1.8rem;background:var(--black2);transition:background .2s}
+.svc-card:hover{background:var(--black3)}
+.svc-icon{width:44px;height:44px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:1.3rem}
+.svc-icon.o{background:rgba(232,92,13,.15)}.svc-icon.g{background:rgba(27,107,47,.2)}.svc-icon.p{background:rgba(91,33,182,.2)}
+.svc-card h3{font-size:.95rem;font-weight:600;color:#fff;margin-bottom:.5rem}
+.svc-card p{font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.6}
+.svc-tag{font-size:.64rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.4rem;display:block}
+.svc-tag.o{color:var(--orange)}.svc-tag.g{color:var(--green-l)}.svc-tag.p{color:var(--purple-l)}
+/* YOUTH */
+.youth{background:var(--off)}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}
+.sk-card{background:#fff;border:1px solid var(--bdl);padding:1.3rem;border-radius:6px;position:relative;overflow:hidden}
+.sk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sk-card.o::before{background:var(--orange)}.sk-card.g::before{background:var(--green)}.sk-card.p::before{background:var(--purple)}
+.sk-card h4{font-size:.88rem;font-weight:600;margin-bottom:.3rem}.sk-card p{font-size:.75rem;color:var(--gray);line-height:1.5}
+.prog-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.prog{padding:1.8rem;border-radius:6px;color:#fff}
+.prog.o{background:var(--orange)}.prog.p{background:var(--purple)}
+.prog h3{font-size:1rem;font-weight:600;margin-bottom:.5rem}.prog p{font-size:.85rem;opacity:.85;line-height:1.6}
+/* GALLERY */
+.gallery{background:var(--black)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:3px;margin-top:3rem}
+.gi{position:relative;overflow:hidden;cursor:pointer}
+.gi.tall{grid-row:span 2}.gi.wide{grid-column:span 2}
+.gt{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.2rem;transition:transform .3s}
+.gi:hover .gt{transform:scale(1.06)}
+.gt.g1{background:linear-gradient(135deg,#1B3A1F,#2D6A35)}
+.gt.g2{background:linear-gradient(135deg,#1A0A00,#E85C0D)}
+.gt.g3{background:linear-gradient(135deg,#180D30,#5B21B6)}
+.gt.g4{background:linear-gradient(135deg,#0A1A0E,#24922F)}
+.gt.g5{background:linear-gradient(135deg,#2A1000,#E85C0D)}
+.gt.g6{background:linear-gradient(135deg,#100820,#7C3AED)}
+.gt.g7{background:linear-gradient(135deg,#001A08,#1B6B2F)}
+.gt.g8{background:linear-gradient(135deg,#1A0800,#FF7A2F)}
+.gt.g9{background:linear-gradient(135deg,#200040,#5B21B6)}
+.go{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.gi:hover .go{background:rgba(0,0,0,.65)}
+.go-text{opacity:0;transition:opacity .3s;text-align:center}
+.gi:hover .go-text{opacity:1}
+.go-text h4{font-size:.9rem;font-weight:600;color:#fff;margin-bottom:.2rem}
+.go-text span{font-size:.68rem;color:var(--orange);letter-spacing:1.5px;text-transform:uppercase}
+/* TEAM */
+.team{background:#fff}
+.tm-founder{display:grid;grid-template-columns:220px 1fr;background:var(--black);border-radius:8px;overflow:hidden;margin-top:3.5rem;margin-bottom:2rem}
+.tm-fl{background:linear-gradient(160deg,var(--orange) 0%,#7A2000 100%);padding:2.5rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center}
+.tm-av{width:88px;height:88px;border-radius:50%;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2rem;color:#fff;font-weight:700;margin-bottom:1rem;border:2px solid rgba(255,255,255,.3)}
+.tm-fl h3{color:#fff;font-size:1.05rem;font-weight:700}.tm-fl .role{font-size:.7rem;color:rgba(255,255,255,.65);letter-spacing:1px;margin-top:.2rem}
+.tm-fr{padding:2.5rem}
+.tm-fr p{font-size:.87rem;color:rgba(255,255,255,.6);line-height:1.75;margin-bottom:1rem}
+.rtags{display:flex;flex-wrap:wrap;gap:.5rem}
+.rtag{font-size:.69rem;background:rgba(232,92,13,.15);border:1px solid rgba(232,92,13,.3);color:var(--orange);padding:.22rem .65rem;border-radius:20px}
+.tm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.tm-card{background:var(--off);border:1px solid var(--bdl);border-radius:6px;overflow:hidden}
+.tm-top{padding:1.3rem 1.4rem;display:flex;align-items:center;gap:.9rem;border-bottom:1px solid var(--bdl)}
+.tm-ava{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;flex-shrink:0}
+.tm-ava.o{background:var(--orange-pale);color:var(--orange)}.tm-ava.g{background:var(--green-pale);color:var(--green)}.tm-ava.p{background:var(--purple-pale);color:var(--purple)}
+.tm-top h3{font-size:.88rem;font-weight:600}.tm-top p{font-size:.7rem;color:var(--gray)}
+.tm-body{padding:1rem 1.4rem;font-size:.77rem;color:var(--gray);line-height:1.6}
+.join-bar{background:var(--black);padding:1.4rem 2rem;border-radius:6px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.join-bar h3{color:#fff;font-size:.95rem;font-weight:600}.join-bar p{font-size:.8rem;color:rgba(255,255,255,.45);margin-top:.15rem}
+/* PORTFOLIO */
+.portfolio{background:var(--off)}
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
+.port-cat{background:var(--black);border-radius:6px;padding:2rem 1.8rem;cursor:pointer;transition:transform .2s;position:relative;overflow:hidden}
+.port-cat:hover{transform:translateY(-3px)}
+.port-cat .acc{position:absolute;bottom:0;left:0;right:0;height:3px}
+.port-cat.o .acc{background:var(--orange)}.port-cat.g .acc{background:var(--green-l)}.port-cat.p .acc{background:var(--purple-l)}
+.port-cat h3{font-size:.98rem;font-weight:600;color:#fff;margin-bottom:.3rem}
+.port-cat span{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase}
+.port-cat.o span{color:var(--orange)}.port-cat.g span{color:var(--green-l)}.port-cat.p span{color:var(--purple-l)}
+/* DONATE */
+.donate{background:var(--black)}
+.don-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3.5rem;align-items:start}
+.chk-list{list-style:none;margin:1.5rem 0}
+.chk-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.87rem;color:rgba(255,255,255,.7);margin-bottom:.75rem;line-height:1.5}
+.cdot{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;flex-shrink:0;margin-top:2px;color:#fff}
+.cdot.o{background:var(--orange)}.cdot.g{background:var(--green)}.cdot.p{background:var(--purple)}
+.tier-box{border:1px solid var(--bd);border-radius:6px;overflow:hidden}
+.tier-hd{padding:.75rem 1.2rem;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(232,92,13,.1);border-bottom:1px solid var(--bd);color:var(--orange)}
+.tier-ul{list-style:none}
+.tier-ul li{padding:.82rem 1.2rem;display:flex;justify-content:space-between;border-bottom:1px solid var(--bd);font-size:.84rem;color:rgba(255,255,255,.6)}
+.tier-ul li:last-child{border:none}.t-amt{color:var(--orange);font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700}
+.don-btn{display:block;width:100%;background:var(--orange);color:#fff;text-align:center;padding:.9rem;border-radius:5px;font-weight:700;font-size:.88rem;text-decoration:none;margin-top:1.2rem;letter-spacing:.5px;transition:background .2s}
+.don-btn:hover{background:var(--orange-l)}
+.pay-logos{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.ploogo{font-size:.67rem;border:1px solid var(--bd);color:rgba(255,255,255,.35);padding:.28rem .65rem;border-radius:3px}
+/* PARTNERS */
+.partners{background:#fff;padding:3.5rem 5%;border-top:1px solid var(--bdl)}
+.p-inner{display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.p-label{font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);white-space:nowrap}
+.p-chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.pchip{border:1px solid var(--bdl);padding:.42rem 1rem;border-radius:20px;font-size:.8rem;color:var(--black3)}
+/* BLOG */
+.blog{background:var(--off)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.blog-card{background:#fff;border:1px solid var(--bdl);border-radius:6px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.blog-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.07)}
+.blog-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.blog-img.o{background:linear-gradient(135deg,#1A0A00,#E85C0D)}.blog-img.g{background:linear-gradient(135deg,#001A08,#1B6B2F)}.blog-img.p{background:linear-gradient(135deg,#100820,#5B21B6)}
+.blog-body{padding:1.2rem 1.4rem}
+.btag{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.4rem;display:block}
+.btag.o{color:var(--orange)}.btag.g{color:var(--green)}.btag.p{color:var(--purple)}
+.blog-body h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem;color:var(--black);line-height:1.35}
+.blog-body p{font-size:.78rem;color:var(--gray);line-height:1.5}
+/* CONTACT */
+.contact{background:#fff}
+.con-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;margin-top:3.5rem;align-items:start}
+.ci{display:flex;gap:.9rem;margin-bottom:1.3rem;align-items:flex-start}
+.ci-icon{width:38px;height:38px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.ci-icon.o{background:var(--orange-pale)}.ci-icon.g{background:var(--green-pale)}.ci-icon.p{background:var(--purple-pale)}
+.ci-text .lbl{font-size:.64rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);font-weight:600;margin-bottom:.1rem}
+.ci-text a,.ci-text .val{font-size:.87rem;color:var(--black);text-decoration:none;font-weight:500}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.fg{margin-bottom:1rem}
+label{display:block;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:.38rem}
+input,textarea{width:100%;border:1.5px solid var(--bdl);border-radius:5px;padding:.7rem 1rem;font-size:.87rem;font-family:'Inter',sans-serif;background:var(--off);color:var(--black);transition:border-color .2s;outline:none}
+input:focus,textarea:focus{border-color:var(--orange)}
+textarea{height:120px;resize:vertical}
+.btn-send{background:var(--orange);color:#fff;padding:.82rem 2.2rem;border:none;border-radius:5px;font-size:.88rem;font-weight:700;cursor:pointer;transition:background .2s}
+.btn-send:hover{background:var(--orange-l)}
+/* MAP */
+.map-section{background:var(--off);padding:0 5% 5rem}
+.map-wrap{margin-top:1.5rem;border-radius:8px;overflow:hidden;border:2px solid var(--bdl)}
+.map-wrap iframe{display:block;width:100%;height:420px;border:none}
+/* FOOTER */
+footer{background:var(--black);color:#fff;padding:4rem 5% 2rem}
+.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.ft-logo{display:flex;align-items:center;gap:.7rem;margin-bottom:.8rem}
+.ft-brand{font-family:'Playfair Display',serif;color:var(--orange);font-size:1.1rem;font-weight:700}
+.ft-sub{font-size:.6rem;color:rgba(255,255,255,.3);letter-spacing:2.5px;text-transform:uppercase}
+.ft-desc{font-size:.8rem;color:rgba(255,255,255,.38);line-height:1.7;max-width:230px;margin-bottom:1rem}
+.soc-row{display:flex;gap:.7rem}
+.soc{width:34px;height:34px;border:1px solid var(--bd);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:.7rem;font-weight:700;text-decoration:none;transition:all .2s}
+.soc:hover{border-color:var(--orange);color:var(--orange)}
+.ft-col h4{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:1rem}
+.ft-col ul{list-style:none}.ft-col li{margin-bottom:.55rem}
+.ft-col a{font-size:.82rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.ft-col a:hover{color:var(--orange)}
+.ft-bottom{border-top:1px solid var(--bd);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-bottom p{font-size:.73rem;color:rgba(255,255,255,.22)}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .about-grid,.don-grid,.con-grid,.tm-founder{grid-template-columns:1fr}
+  .svc-grid,.skills-grid,.tm-grid,.port-grid,.blog-grid,.gal-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}.ft-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .svc-grid,.skills-grid,.tm-grid,.port-grid,.blog-grid,.prog-row,.form-row,.gal-grid{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
-<body data-bs-spy="scroll" data-bs-target=".navbar">
+<body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand" href="#home">
-                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/QcsOPihcAqjyulzZ.png" alt="KESH MEDIA Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#youth">Empowerment</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#impact">Impact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    <li class="nav-item ms-lg-3"><a class="btn btn-premium btn-primary-p py-2 px-4" href="#donate">Donate</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<!-- NAV with SVG Logo -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">
+      <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="7" fill="#111"/>
+        <rect x="7" y="8" width="4.5" height="24" rx="1" fill="#E85C0D"/>
+        <polygon points="11.5,20 23,8 28.5,8 17,20 28.5,32 23,32" fill="#E85C0D"/>
+        <circle cx="32" cy="10" r="2.2" fill="#24922F"/>
+        <circle cx="32" cy="16.5" r="2.2" fill="#24922F"/>
+        <circle cx="32" cy="23" r="2.2" fill="#24922F"/>
+        <rect x="7" y="18.5" width="4.5" height="3" rx="1" fill="#7C3AED"/>
+      </svg>
+      <div class="nav-logo-text"><span class="brand">KESH MEDIA</span><span class="sub">Productions Ltd</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#youth">Youth</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#donate" class="nav-cta">Donate</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- Hero -->
-    <header id="home" class="hero">
-        <div class="container">
-            <div class="hero-content" data-aos="fade-up">
-                <span class="badge bg-primary mb-3 px-3 py-2">Uganda's Premier Production House</span>
-                <h1>Telling African Stories That Matter</h1>
-                <p>We are a leading multimedia production company dedicated to impactful visual storytelling, professional cinematography, and empowering the next generation of digital creators.</p>
-                <div class="d-flex flex-wrap gap-3">
-                    <a href="#contact" class="btn btn-premium btn-primary-p">Book a Service</a>
-                    <a href="#gallery" class="btn btn-premium btn-outline-light">View Portfolio</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Welcome & About -->
-    <section id="about">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
-                    <div class="position-relative">
-                        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/sUpapUrqZeSeEhQu.jpg" alt="About Kesh Media" class="img-fluid rounded-4 shadow-lg">
-                        <div class="position-absolute bottom-0 end-0 bg-primary p-4 rounded-4 m-4 text-white shadow-lg d-none d-md-block">
-                            <h3 class="mb-0 fw-bold">10+ Years</h3>
-                            <p class="mb-0">of Excellence</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
-                    <div class="section-title text-start">
-                        <h2 class="text-start">Who We Are</h2>
-                    </div>
-                    <p class="lead fw-bold text-primary">KESH MEDIA PRODUCTIONS LTD is more than just a media company.</p>
-                    <p>We specialize in high-quality documentary production, television projects, professional photography, and advanced drone filming. Our mission is to produce world-class content while empowering youth through practical skills, mentorship, and employment opportunities.</p>
-                    
-                    <div class="row mt-4 g-4">
-                        <div class="col-md-6">
-                            <div class="premium-card p-3">
-                                <h5 class="fw-bold"><i class="fas fa-eye text-primary me-2"></i> Vision</h5>
-                                <p class="small mb-0">To become Africa's leading storytelling and youth empowerment media organization.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="premium-card p-3">
-                                <h5 class="fw-bold"><i class="fas fa-bullseye text-primary me-2"></i> Mission</h5>
-                                <p class="small mb-0">To produce high-quality media while empowering youth through practical innovation.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="bg-light">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p>Tailored Media Solutions for Global Impact</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-4" data-aos="fade-up">
-                    <div class="premium-card">
-                        <div class="icon-box"><i class="fas fa-video"></i></div>
-                        <h3>Documentary Production</h3>
-                        <p>We create compelling visual narratives covering Climate Change, Tourism, Agriculture, and Health for NGOs and Governments.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="premium-card">
-                        <div class="icon-box"><i class="fas fa-helicopter"></i></div>
-                        <h3>Drone Services</h3>
-                        <p>High-end aerial cinematography, land mapping, and tourism promotion using state-of-the-art drone technology.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="premium-card">
-                        <div class="icon-box"><i class="fas fa-camera"></i></div>
-                        <h3>Photography</h3>
-                        <p>Professional commercial, corporate, and event photography that captures the soul of your brand or event.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Youth Empowerment -->
-    <section id="youth">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 order-lg-2 mb-5 mb-lg-0" data-aos="fade-left">
-                    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/nITkDzpexZZRXMzE.jpg" alt="Youth Training" class="img-fluid rounded-4 shadow-lg">
-                </div>
-                <div class="col-lg-6 order-lg-1 pe-lg-5" data-aos="fade-right">
-                    <div class="section-title text-start">
-                        <h2 class="text-start">Youth Skilling Center</h2>
-                    </div>
-                    <p class="lead">Empowering the next generation of African digital storytellers.</p>
-                    <p>Our Youth Media Empowerment Program equips young people with practical skills in photography, videography, drone operations, and digital marketing.</p>
-                    
-                    <div class="row g-3 mt-4">
-                        <div class="col-md-6"><i class="fas fa-check-circle text-primary me-2"></i> Professional Filming</div>
-                        <div class="col-md-6"><i class="fas fa-check-circle text-primary me-2"></i> Video Editing</div>
-                        <div class="col-md-6"><i class="fas fa-check-circle text-primary me-2"></i> Graphic Design</div>
-                        <div class="col-md-6"><i class="fas fa-check-circle text-primary me-2"></i> Drone Safety</div>
-                    </div>
-                    
-                    <div class="mt-5">
-                        <div class="premium-card bg-light">
-                            <h5><i class="fas fa-user-graduate text-primary me-2"></i> Internship & Mentorship</h5>
-                            <p class="small mb-0">Gain hands-on experience on real projects with industry experts. We provide career guidance and business coaching.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery -->
-    <section id="gallery" class="bg-light">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Portfolio</h2>
-                <p>Visual Excellence in Action</p>
-            </div>
-            
-            <div class="gallery-filter mb-5" data-aos="fade-up">
-                <button class="btn active" data-filter="all">All Projects</button>
-                <button class="btn" data-filter="doc">Documentaries</button>
-                <button class="btn" data-filter="drone">Drone</button>
-                <button class="btn" data-filter="photo">Photography</button>
-            </div>
-
-            <div class="row g-4 gallery-container">
-                <div class="col-lg-4 col-md-6 gallery-item doc" data-aos="fade-up">
-                    <div class="gallery-wrap" onclick="openLightbox('https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/lusRcxilAOPsiZbH.jpg', 'Documentary: The Spirit of Uganda')">
-                        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/lusRcxilAOPsiZbH.jpg" alt="Doc">
-                        <div class="gallery-overlay">
-                            <h4>Film Production</h4>
-                            <p>Documentary</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 gallery-item drone" data-aos="fade-up" data-aos-delay="100">
-                    <div class="gallery-wrap" onclick="openLightbox('https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/cNaCclOJCSrRBTRy.jpg', 'Aerial View: Tourism Promotion')">
-                        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/cNaCclOJCSrRBTRy.jpg" alt="Drone">
-                        <div class="gallery-overlay">
-                            <h4>Drone Services</h4>
-                            <p>Aerial Cinematography</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 gallery-item photo" data-aos="fade-up" data-aos-delay="200">
-                    <div class="gallery-wrap" onclick="openLightbox('https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/sUpapUrqZeSeEhQu.jpg', 'Commercial: Brand Storytelling')">
-                        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/sUpapUrqZeSeEhQu.jpg" alt="Photo">
-                        <div class="gallery-overlay">
-                            <h4>Photography</h4>
-                            <p>Corporate Portraits</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact -->
-    <section id="impact" class="bg-secondary text-white py-5">
-        <div class="container py-4">
-            <div class="row text-center g-4">
-                <div class="col-md-3" data-aos="fade-up">
-                    <h2 class="impact-number mb-0">500+</h2>
-                    <p class="mb-0">Youth Trained</p>
-                </div>
-                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-                    <h2 class="impact-number mb-0">300+</h2>
-                    <p class="mb-0">Media Projects</p>
-                </div>
-                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-                    <h2 class="impact-number mb-0">100+</h2>
-                    <p class="mb-0">Communities Reached</p>
-                </div>
-                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
-                    <h2 class="impact-number mb-0">50+</h2>
-                    <p class="mb-0">Partnerships</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Map -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Get In Touch</h2>
-                <p>Let's Tell Your Story Together</p>
-            </div>
-            <div class="row g-5">
-                <div class="col-lg-5" data-aos="fade-right">
-                    <div class="premium-card bg-secondary text-white">
-                        <h4 class="text-white mb-4">Contact Information</h4>
-                        <div class="d-flex mb-4">
-                            <div class="icon-box me-3 bg-primary text-white"><i class="fas fa-phone"></i></div>
-                            <div>
-                                <p class="mb-0 fw-bold">Call Us</p>
-                                <p class="mb-0">+256 774 503 176</p>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-4">
-                            <div class="icon-box me-3 bg-primary text-white"><i class="fab fa-whatsapp"></i></div>
-                            <div>
-                                <p class="mb-0 fw-bold">WhatsApp</p>
-                                <p class="mb-0">+256 701 289 424</p>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-4">
-                            <div class="icon-box me-3 bg-primary text-white"><i class="fas fa-envelope"></i></div>
-                            <div>
-                                <p class="mb-0 fw-bold">Email Us</p>
-                                <p class="mb-0">info@keshmedia.com</p>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="icon-box me-3 bg-primary text-white"><i class="fas fa-map-marker-alt"></i></div>
-                            <div>
-                                <p class="mb-0 fw-bold">Our Office</p>
-                                <p class="mb-0">Hajji musa kasule building, Behind Wandegeya Market, Kampala, Uganda</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7" data-aos="fade-left">
-                    <form class="premium-card">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Full Name</label>
-                                <input type="text" class="form-control" placeholder="John Doe">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" placeholder="john@example.com">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">Subject</label>
-                                <input type="text" class="form-control" placeholder="Project Inquiry">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">Message</label>
-                                <textarea class="form-control" rows="5" placeholder="Tell us about your project..."></textarea>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-premium btn-primary-p w-100">Send Message</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Map Section -->
-            <div class="row mt-5">
-                <div class="col-12" data-aos="fade-up">
-                    <div class="map-container">
-                        <!-- Google Maps Embed for Wandegeya, Kampala -->
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m3!1d3989.754716474685!2d32.571474614753!3d0.3314999997581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb7486e9276f%3A0x6d445479066601f0!2sWandegeya%20Market!5e0!3m2!1sen!2sug!4v1688000000000!5m2!1sen!2sug" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-4">
-                    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663801075840/QcsOPihcAqjyulzZ.png" alt="KESH MEDIA Logo" class="footer-logo">
-                    <p>Creating powerful stories. Empowering youth. Transforming communities through the power of media and technology.</p>
-                    <div class="mt-4">
-                        <a href="#" class="social-circle"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-circle"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-circle"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <h4 class="text-white">Quick Links</h4>
-                    <a href="#home" class="footer-link">Home</a>
-                    <a href="#about" class="footer-link">About Us</a>
-                    <a href="#services" class="footer-link">Our Services</a>
-                    <a href="#gallery" class="footer-link">Portfolio</a>
-                </div>
-                <div class="col-lg-2">
-                    <h4 class="text-white">Support</h4>
-                    <a href="#donate" class="footer-link">Donate</a>
-                    <a href="#youth" class="footer-link">Youth Skilling</a>
-                    <a href="#contact" class="footer-link">Contact</a>
-                </div>
-                <div class="col-lg-4">
-                    <h4 class="text-white">Newsletter</h4>
-                    <p>Subscribe to get the latest news and updates.</p>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control bg-dark border-secondary text-white" placeholder="Email Address">
-                        <button class="btn btn-primary" type="button">Join</button>
-                    </div>
-                </div>
-            </div>
-            <hr class="mt-5 border-secondary">
-            <div class="text-center mt-4">
-                <p class="mb-0 small">&copy; 2026 KESH MEDIA PRODUCTIONS LTD. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Lightbox -->
-    <div id="lightbox" onclick="closeLightbox()">
-        <span id="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="" alt="Preview">
-        <div id="lightbox-caption" class="text-white mt-3 text-center fs-5"></div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="hb-dot"></span><span>Uganda's Leading Multimedia Studio</span></div>
+    <h1 class="htitle">Telling <span class="o">African</span><br>Stories Through<br><span class="g">Film</span>, <span class="p">Photography</span><br>&amp; Youth Power</h1>
+    <p class="hdesc">Documentary production, drone cinematography, photography, and media skills training — rooted in Uganda, reaching the world.</p>
+    <div class="hbtns">
+      <a href="#services" class="btn-o">Book a Service</a>
+      <a href="#gallery" class="btn-g">View Gallery</a>
+      <a href="#donate" class="btn-p">Donate to Youth</a>
+      <a href="#about" class="btn-gh">Learn More</a>
     </div>
+  </div>
+</section>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize Animations
-        AOS.init({ duration: 1000, once: true });
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-grid">
+    <div class="stat-item"><div class="stat-num o">500+</div><div class="stat-label">Youth Trained</div></div>
+    <div class="stat-item"><div class="stat-num g">300+</div><div class="stat-label">Media Projects</div></div>
+    <div class="stat-item"><div class="stat-num p">100+</div><div class="stat-label">Communities Reached</div></div>
+    <div class="stat-item"><div class="stat-num w">50+</div><div class="stat-label">Partner Organizations</div></div>
+  </div>
+</div>
 
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                document.getElementById('mainNav').classList.add('scrolled');
-            } else {
-                document.getElementById('mainNav').classList.remove('scrolled');
-            }
-        });
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="eyebrow o">Who we are</div>
+  <h2 class="stitle">A Uganda-based multimedia production company</h2>
+  <p class="slead">We specialize in documentary production, television, photography, videography, drone filming, digital storytelling, journalism, media training, and youth empowerment — with a focus on education, tourism, climate change, culture, and community transformation.</p>
+  <div class="about-grid">
+    <div>
+      <div class="vm-block"><h3>Our Vision</h3><p>To become Africa's leading storytelling and youth empowerment media organization that inspires positive social and economic transformation.</p></div>
+      <div class="vm-block gn"><h3>Our Mission</h3><p>To produce high-quality media content while empowering youth through practical skills training, mentorship, innovation, and employment opportunities.</p></div>
+      <div class="vm-block pp"><h3>Specializations</h3><p>Documentary · TV production · Photography · Videography · Drone filming · Digital storytelling · Journalism · Media training · Youth empowerment</p></div>
+    </div>
+    <div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1.2rem">Core Values</h3>
+      <div class="values-grid">
+        <div class="vc o"><h4>Excellence</h4><p>Highest quality in everything we do.</p></div>
+        <div class="vc g"><h4>Innovation</h4><p>Embracing creativity and emerging technologies.</p></div>
+        <div class="vc p"><h4>Integrity</h4><p>Professionalism, honesty, and accountability.</p></div>
+        <div class="vc b"><h4>Empowerment</h4><p>Every young person deserves to succeed.</p></div>
+        <div class="vc o" style="grid-column:1/-1"><h4>Impact</h4><p>We create media that drives lasting positive change across Uganda and beyond — one story at a time.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Gallery Filter
-        const filterBtns = document.querySelectorAll('.gallery-filter .btn');
-        const galleryItems = document.querySelectorAll('.gallery-item');
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="eyebrow o">What we do</div>
+  <h2 class="stitle lt">Professional media services</h2>
+  <p class="slead lt">From aerial cinematography to corporate video, we deliver compelling visual stories for NGOs, governments, businesses, and communities.</p>
+  <div class="svc-grid">
+    <div class="svc-card"><span class="svc-tag o">Film</span><div class="svc-icon o">🎬</div><h3>Documentary Production</h3><p>Compelling documentaries on climate change, tourism, agriculture, youth, health, culture, and conservation.</p></div>
+    <div class="svc-card"><span class="svc-tag g">Aerial</span><div class="svc-icon g">🚁</div><h3>Drone Services</h3><p>Aerial photography and videography for tourism, land mapping, real estate, and high-impact visual campaigns.</p></div>
+    <div class="svc-card"><span class="svc-tag p">Visual</span><div class="svc-icon p">📷</div><h3>Photography</h3><p>Commercial, event, tourism, corporate portrait, and product photography to the highest professional standards.</p></div>
+    <div class="svc-card"><span class="svc-tag o">Corporate</span><div class="svc-icon o">🎥</div><h3>Corporate Video</h3><p>Professional videos for NGOs, government institutions, businesses, and development organizations.</p></div>
+    <div class="svc-card"><span class="svc-tag g">Events</span><div class="svc-icon g">🎙️</div><h3>Event Coverage</h3><p>Professional coverage for conferences, workshops, weddings, launches, and corporate events across Uganda.</p></div>
+    <div class="svc-card"><span class="svc-tag p">Education</span><div class="svc-icon p">🎓</div><h3>Media Training</h3><p>Hands-on training in photography, videography, drone operations, editing, journalism, and digital marketing.</p></div>
+  </div>
+</section>
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.getAttribute('data-filter');
-                
-                galleryItems.forEach(item => {
-                    if (filter === 'all' || item.classList.contains(filter)) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
+<!-- YOUTH -->
+<section class="youth" id="youth">
+  <div class="eyebrow g">Youth empowerment</div>
+  <h2 class="stitle">Building the next generation of African storytellers</h2>
+  <p class="slead">Our Youth Media Empowerment Program equips young people with practical skills that increase employability, entrepreneurship, and digital literacy across Uganda.</p>
+  <div class="skills-grid">
+    <div class="sk-card o"><h4>Photography</h4><p>Camera ops, composition, lighting, editing &amp; commercial work</p></div>
+    <div class="sk-card g"><h4>Videography</h4><p>Filming, storytelling, interview techniques &amp; content creation</p></div>
+    <div class="sk-card p"><h4>Drone Operations</h4><p>Safety, flight ops, aerial cinematography &amp; regulations</p></div>
+    <div class="sk-card o"><h4>Graphic Design</h4><p>Photoshop, Canva, branding &amp; social media design</p></div>
+    <div class="sk-card g"><h4>Video Editing</h4><p>Premiere Pro, color grading, sound &amp; motion graphics</p></div>
+    <div class="sk-card p"><h4>Journalism</h4><p>News reporting, feature writing &amp; investigative journalism</p></div>
+    <div class="sk-card o"><h4>Digital Marketing</h4><p>Social media, SEO, content strategy &amp; audience growth</p></div>
+    <div class="sk-card g"><h4>Digital Storytelling</h4><p>Visual narrative, publishing, content packaging &amp; branding</p></div>
+  </div>
+  <div class="prog-row">
+    <div class="prog o"><h3>🎯 Internship Program</h3><p>Young people gain hands-on experience working on real projects alongside experienced media professionals, building portfolios that open career doors.</p></div>
+    <div class="prog p"><h3>🌟 Mentorship Program</h3><p>Industry experts provide career guidance, business coaching, professional networking, and leadership development to help graduates thrive.</p></div>
+  </div>
+</section>
 
-        // Lightbox
-        function openLightbox(src, caption) {
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox-caption').textContent = caption;
-            document.getElementById('lightbox').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="eyebrow p">Gallery</div>
+  <h2 class="stitle lt">Our work in frames</h2>
+  <p class="slead lt">From mountain gorillas to city skylines — a selection of our photography, film, and drone projects across Uganda and beyond.</p>
+  <div class="gal-grid">
+    <div class="gi tall">
+      <div class="gt g1">🌿</div>
+      <div class="go"><div class="go-text"><h4>Wildlife Documentary</h4><span>Film</span></div></div>
+    </div>
+    <div class="gi">
+      <div class="gt g2">🚁</div>
+      <div class="go"><div class="go-text"><h4>Aerial Kampala</h4><span>Drone</span></div></div>
+    </div>
+    <div class="gi">
+      <div class="gt g3">🎭</div>
+      <div class="go"><div class="go-text"><h4>Cultural Festival</h4><span>Photography</span></div></div>
+    </div>
+    <div class="gi wide">
+      <div class="gt g5">🌄</div>
+      <div class="go"><div class="go-text"><h4>Nile River Sunrise</h4><span>Drone · Landscape</span></div></div>
+    </div>
+    <div class="gi">
+      <div class="gt g4">🌾</div>
+      <div class="go"><div class="go-text"><h4>Agriculture Stories</h4><span>Documentary</span></div></div>
+    </div>
+    <div class="gi">
+      <div class="gt g6">🎓</div>
+      <div class="go"><div class="go-text"><h4>Youth Training</h4><span>Photography</span></div></div>
+    </div>
+    <div class="gi">
+      <div class="gt g7">🏞️</div>
+      <div class="go"><div class="go-text"><h4>Tourism Campaign</h4><span>Commercial</span></div></div>
+    </div>
+    <div class="gi">
+      <div class="gt g8">📋</div>
+      <div class="go"><div class="go-text"><h4>NGO Coverage</h4><span>Corporate</span></div></div>
+    </div>
+    <div class="gi">
+      <div class="gt g9">🎵</div>
+      <div class="go"><div class="go-text"><h4>Music Video</h4><span>Production</span></div></div>
+    </div>
+  </div>
+</section>
 
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="eyebrow o">Our team</div>
+  <h2 class="stitle">The people behind the stories</h2>
+  <p class="slead">A passionate team of storytellers, filmmakers, photographers, trainers, and journalists dedicated to producing impactful media while empowering the next generation.</p>
+  <div class="tm-founder">
+    <div class="tm-fl">
+      <div class="tm-av">SM</div>
+      <h3>Samuel Musana</h3>
+      <div class="role">Founder &amp; Managing Director</div>
+    </div>
+    <div class="tm-fr">
+      <p>Samuel Musana is an award-winning media practitioner, filmmaker, photographer, drone pilot, and development communicator with extensive experience in multimedia storytelling, documentary production, climate reporting, tourism promotion, and youth empowerment initiatives.</p>
+      <p>As the founder of KESH MEDIA PRODUCTIONS LTD, he leads the organization's strategic vision, partnerships, project implementation, and creative direction while mentoring young media professionals across Uganda.</p>
+      <div class="rtags">
+        <span class="rtag">Strategic Leadership</span>
+        <span class="rtag">Business Development</span>
+        <span class="rtag">Documentary Production</span>
+        <span class="rtag">Client Relations</span>
+        <span class="rtag">Partnerships &amp; Fundraising</span>
+        <span class="rtag">Project Management</span>
+      </div>
+    </div>
+  </div>
+  <div class="tm-grid">
+    <div class="tm-card"><div class="tm-top"><div class="tm-ava o">HP</div><div><h3>Head of Production</h3><p>Production Department</p></div></div><div class="tm-body">Oversees all video productions, documentaries, and multimedia campaigns from concept to final delivery with full quality assurance.</div></div>
+    <div class="tm-card"><div class="tm-top"><div class="tm-ava g">SV</div><div><h3>Senior Videographer</h3><p>Production Department</p></div></div><div class="tm-body">Leads filming operations and ensures professional visual storytelling standards across all productions and event coverage.</div></div>
+    <div class="tm-card"><div class="tm-top"><div class="tm-ava p">VE</div><div><h3>Video Editor &amp; Motion</h3><p>Production Department</p></div></div><div class="tm-body">Transforms raw footage into engaging visual stories through expert editing, color grading, and motion graphics.</div></div>
+    <div class="tm-card"><div class="tm-top"><div class="tm-ava o">LP</div><div><h3>Lead Photographer</h3><p>Photography Department</p></div></div><div class="tm-body">Delivers high-quality photography for events, corporate clients, tourism campaigns, and organizational projects.</div></div>
+    <div class="tm-card"><div class="tm-top"><div class="tm-ava g">DS</div><div><h3>Drone Ops Specialist</h3><p>Photography Department</p></div></div><div class="tm-body">Aerial photography, videography, drone safety compliance, and equipment maintenance across all projects.</div></div>
+    <div class="tm-card"><div class="tm-top"><div class="tm-ava p">YC</div><div><h3>Youth Programs Coordinator</h3><p>Training Department</p></div></div><div class="tm-body">Leads youth skilling initiatives, training coordination, mentorship programs, and community outreach across Uganda.</div></div>
+  </div>
+  <div class="join-bar">
+    <div><h3>Join our team</h3><p>Internships, freelance, volunteer, and contract opportunities for passionate media professionals.</p></div>
+    <a href="mailto:careers@keshmedia.com" class="btn-o" style="white-space:nowrap">Apply → careers@keshmedia.com</a>
+  </div>
+</section>
 
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="eyebrow p">Our work</div>
+  <h2 class="stitle">Projects &amp; portfolio</h2>
+  <p class="slead">From climate documentaries to tourism campaigns, our work spans communities, districts, and causes that matter.</p>
+  <div class="port-grid">
+    <div class="port-cat o"><h3>Documentary Projects</h3><span>Film &amp; Television</span><div class="acc"></div></div>
+    <div class="port-cat g"><h3>Drone Projects</h3><span>Aerial Cinematography</span><div class="acc"></div></div>
+    <div class="port-cat p"><h3>Photography</h3><span>Commercial &amp; Events</span><div class="acc"></div></div>
+    <div class="port-cat o"><h3>Tourism Campaigns</h3><span>Destination Uganda</span><div class="acc"></div></div>
+    <div class="port-cat g"><h3>NGO Projects</h3><span>Development Stories</span><div class="acc"></div></div>
+    <div class="port-cat p"><h3>Youth Success Stories</h3><span>Transformation Narratives</span><div class="acc"></div></div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<section class="donate" id="donate">
+  <div class="eyebrow o">Support our mission</div>
+  <h2 class="stitle lt">Help us empower Uganda's youth</h2>
+  <p class="slead lt">Many talented young people cannot afford professional media training. Your donation changes that — directly and immediately.</p>
+  <div class="don-grid">
+    <div>
+      <ul class="chk-list">
+        <li><span class="cdot o">✓</span>Train vulnerable youth in practical media skills</li>
+        <li><span class="cdot g">✓</span>Provide cameras and professional equipment</li>
+        <li><span class="cdot p">✓</span>Offer scholarships to deserving students</li>
+        <li><span class="cdot o">✓</span>Support internships with experienced professionals</li>
+        <li><span class="cdot g">✓</span>Establish community media hubs across Uganda</li>
+        <li><span class="cdot p">✓</span>Promote digital inclusion and literacy</li>
+        <li><span class="cdot o">✓</span>Create lasting employment opportunities</li>
+      </ul>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.35)">Become a monthly Youth Empowerment Partner and sustain long-term impact.</p>
+    </div>
+    <div>
+      <div class="tier-box">
+        <div class="tier-hd">One-time donation options</div>
+        <ul class="tier-ul">
+          <li><span>Support learning materials</span><span class="t-amt">$50</span></li>
+          <li><span>Support practical training</span><span class="t-amt">$100</span></li>
+          <li><span>Sponsor a student for one week</span><span class="t-amt">$150</span></li>
+          <li><span>Support equipment access</span><span class="t-amt">$200</span></li>
+          <li><span>Sponsor a full training program</span><span class="t-amt">$500+</span></li>
+        </ul>
+      </div>
+      <a href="#" class="don-btn">DONATE NOW — SUPPORT YOUTH TODAY</a>
+      <div class="pay-logos">
+        <span class="ploogo">Visa</span><span class="ploogo">Mastercard</span><span class="ploogo">PayPal</span>
+        <span class="ploogo">Flutterwave</span><span class="ploogo">MTN MoMo</span>
+        <span class="ploogo">Airtel Money</span><span class="ploogo">Bank Transfer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<div class="partners">
+  <div class="p-inner">
+    <span class="p-label">Partnerships welcome</span>
+    <div class="p-chips">
+      <span class="pchip">NGOs</span><span class="pchip">Government Agencies</span>
+      <span class="pchip">Private Sector</span><span class="pchip">International Organizations</span>
+      <span class="pchip">Foundations</span><span class="pchip">Educational Institutions</span>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="eyebrow g">Blog &amp; news</div>
+  <h2 class="stitle">Stories from the field</h2>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <div class="blog-img o">🎬</div>
+      <div class="blog-body"><span class="btag o">Media Insights</span><h3>How documentary film is changing the way Uganda tells its own story</h3><p>A look at the growing movement of local filmmakers reclaiming the narrative on climate, culture, and development.</p></div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img g">🚁</div>
+      <div class="blog-body"><span class="btag g">Drone Innovation</span><h3>Aerial perspectives: how drone technology is transforming Uganda's tourism industry</h3><p>From mountain gorillas to the Nile, aerial cinematography is putting Uganda's natural wonders in a new light.</p></div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img p">🌱</div>
+      <div class="blog-body"><span class="btag p">Youth Success</span><h3>From student to studio owner: graduates building their own media businesses</h3><p>Three graduates share how practical media training opened doors they never imagined possible.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="eyebrow o">Get in touch</div>
+  <h2 class="stitle">Let's work together</h2>
+  <div class="con-grid">
+    <div>
+      <h3 style="font-size:1rem;font-weight:600;margin-bottom:.3rem">KESH MEDIA PRODUCTIONS LTD</h3>
+      <p style="font-size:.82rem;color:var(--gray);margin-bottom:1.5rem">Reach us through any of the channels below — we'd love to hear about your project.</p>
+      <div class="ci"><div class="ci-icon o">📞</div><div class="ci-text"><p class="lbl">Phone</p><a href="tel:+256774503176" class="val">+256 774 503 176</a></div></div>
+      <div class="ci"><div class="ci-icon g">💬</div><div class="ci-text"><p class="lbl">WhatsApp</p><a href="https://wa.me/256701289424" class="val">+256 701 289 424</a></div></div>
+      <div class="ci"><div class="ci-icon p">✉️</div><div class="ci-text"><p class="lbl">Email</p><a href="mailto:info@keshmedia.com" class="val">info@keshmedia.com</a></div></div>
+      <div class="ci"><div class="ci-icon o">🌐</div><div class="ci-text"><p class="lbl">Website</p><a href="http://www.keshmedia.com" class="val">www.keshmedia.com</a></div></div>
+      <div class="ci"><div class="ci-icon g">📍</div><div class="ci-text"><p class="lbl">Office</p><span class="val" style="font-size:.82rem;font-weight:400">Hajji Musa Kasule Building, Behind Wandegaya Market, Southwing, Kampala, Uganda</span></div></div>
+    </div>
+    <div>
+      <div class="form-row">
+        <div class="fg"><label>Full name</label><input type="text" placeholder="Your full name"/></div>
+        <div class="fg"><label>Email address</label><input type="email" placeholder="you@example.com"/></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Phone number</label><input type="tel" placeholder="+256 ..."/></div>
+        <div class="fg"><label>Organization</label><input type="text" placeholder="Your organization"/></div>
+      </div>
+      <div class="fg"><label>Subject</label><input type="text" placeholder="How can we help?"/></div>
+      <div class="fg"><label>Message</label><textarea placeholder="Tell us about your project or inquiry..."></textarea></div>
+      <button class="btn-send">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- MAP SECTION -->
+<div class="map-section" id="map-section">
+  <div class="eyebrow g" style="margin-bottom:.5rem">Find us</div>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--black);margin-bottom:.3rem">Wandegaya, Kampala, Uganda</h3>
+  <p style="font-size:.85rem;color:var(--gray);margin-bottom:1rem">Hajji Musa Kasule Building, Behind Wandegaya Market, Southwing · Coordinates: 0.3325°N, 32.5730°E</p>
+  <div class="map-wrap">
+    <iframe
+      src="https://www.openstreetmap.org/export/embed.html?bbox=32.5660%2C0.3260%2C32.5800%2C0.3390&layer=mapnik&marker=0.3325%2C32.5730"
+      allowfullscreen loading="lazy"
+      title="Kesh Media Productions — Wandegaya, Kampala, Uganda">
+    </iframe>
+  </div>
+  <p style="font-size:.74rem;color:var(--gray);margin-top:.5rem;text-align:right">
+    <a href="https://www.openstreetmap.org/?mlat=0.3325&mlon=32.5730#map=16/0.3325/32.5730" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:none">Open in full map →</a>
+  </p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="ft-logo">
+        <svg width="34" height="34" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="7" fill="#1A1A1A"/>
+          <rect x="7" y="8" width="4.5" height="24" rx="1" fill="#E85C0D"/>
+          <polygon points="11.5,20 23,8 28.5,8 17,20 28.5,32 23,32" fill="#E85C0D"/>
+          <circle cx="32" cy="10" r="2.2" fill="#24922F"/>
+          <circle cx="32" cy="16.5" r="2.2" fill="#24922F"/>
+          <circle cx="32" cy="23" r="2.2" fill="#24922F"/>
+          <rect x="7" y="18.5" width="4.5" height="3" rx="1" fill="#7C3AED"/>
+        </svg>
+        <div><div class="ft-brand">KESH MEDIA</div><div class="ft-sub">Productions Ltd</div></div>
+      </div>
+      <p class="ft-desc">Creating powerful stories. Empowering youth. Transforming communities through film, photography, and media training.</p>
+      <div class="soc-row">
+        <a class="soc" href="#">fb</a><a class="soc" href="#">ig</a><a class="soc" href="#">yt</a><a class="soc" href="#">tt</a><a class="soc" href="#">in</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li><li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li><li><a href="#youth">Youth Empowerment</a></li>
+        <li><a href="#gallery">Gallery</a></li><li><a href="#portfolio">Portfolio</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>More</h4>
+      <ul>
+        <li><a href="#team">Our Team</a></li><li><a href="#donate">Donate</a></li>
+        <li><a href="#blog">Blog &amp; News</a></li><li><a href="#contact">Contact</a></li>
+        <li><a href="mailto:careers@keshmedia.com">Careers</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+256774503176">+256 774 503 176</a></li>
+        <li><a href="https://wa.me/256701289424">WhatsApp</a></li>
+        <li><a href="mailto:info@keshmedia.com">info@keshmedia.com</a></li>
+        <li><a href="http://www.keshmedia.com">www.keshmedia.com</a></li>
+        <li><a href="#map-section">Wandegaya, Kampala</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 KESH MEDIA PRODUCTIONS LTD. All Rights Reserved.</p>
+    <p>Uganda's storytelling studio · Telling African stories</p>
+  </div>
+</footer>
 </body>
-</html>
+    </html>
